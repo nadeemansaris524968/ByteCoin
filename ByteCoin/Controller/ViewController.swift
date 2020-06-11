@@ -26,7 +26,7 @@ class ViewController: UIViewController {
 
 //MARK: - CoinManagerDelegate
 extension ViewController: CoinManagerDelegate {
-    func coinManager(_ manager: CoinManager, didUpdateCoinPrice coin: Coin) {
+    func coinManager(_ manager: CoinManager, didUpdateCoinPrice coin: CoinModel) {
         DispatchQueue.main.async {
             self.bitcoinLabel.text = String(format: "%.2f", coin.rate)
             self.currencyLabel.text = coin.asset_id_quote

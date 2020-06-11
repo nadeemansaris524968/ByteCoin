@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CoinManagerDelegate {
-    func coinManager(_ manager: CoinManager, didUpdateCoinPrice coin: Coin)
+    func coinManager(_ manager: CoinManager, didUpdateCoinPrice coin: CoinModel)
     func coinManager(_ manager: CoinManager, didFailWithError error: Error)
 }
 
@@ -38,21 +38,21 @@ struct CoinManager {
                 return
             }
             guard let safeData = data else { return }
-            guard let coin = self.parseJSON(data: safeData) else { return }
-            self.delegate?.coinManager(self, didUpdateCoinPrice: coin)
+            guard let decodedCoin = self.parseJSON(data: safeData) else { return }
+            self.delegate?.coinManager(self, didUpdateCoinPrice: decodedCoin)
         }
         urlSessionTask.resume()
     }
     
-    private func parseJSON(data: Data) -> Coin? {
+    private func parseJSON(data: Data) -> CoinModel? {
         let decoder = JSONDecoder()
-        var coin: Coin?
+        var decodedCoin: CoinModel?
         do {
-            coin = try decoder.decode(Coin.self, from: data)
+            decodedCoin = try decoder.decode(CoinModel.self, from: data)
         } catch {
             delegate?.coinManager(self, didFailWithError: error)
         }
-        return coin
+        return decodedCoin
     }
     
 }
