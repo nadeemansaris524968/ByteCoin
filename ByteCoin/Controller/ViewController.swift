@@ -35,6 +35,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("Currency selected: \(coinManager.currencyArray[row])")
+        let currencyPicked = coinManager.currencyArray[row]
+        coinManager.getCoinPrice(for: currencyPicked)
     }
 }
