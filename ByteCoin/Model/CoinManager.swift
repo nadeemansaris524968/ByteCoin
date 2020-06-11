@@ -9,8 +9,8 @@
 import Foundation
 
 protocol CoinManagerDelegate {
-    func coinManager(_ manager: CoinManager, didUpdateCoinPrice: Coin)
-    func coinManager(_ manager: CoinManager, didFailWithError: Error)
+    func coinManager(_ manager: CoinManager, didUpdateCoinPrice coin: Coin)
+    func coinManager(_ manager: CoinManager, didFailWithError error: Error)
 }
 
 struct CoinManager {
